@@ -13,9 +13,11 @@ class UzytkownikController {
         return await uzytkownik_dao.findAll()
     }
 
+    async get_uzytkownik(id){
+        return await uzytkownik_dao.findById(id)
+    }
+
     async update_uzytkownik(uzytkownik){
-        let old_uzytkownik = await uzytkownik_dao.findById(uzytkownik.id)
-        uzytkownik.id = old_uzytkownik.id;
         let login_ok = await uzytkownik_dao.findByLogin(uzytkownik.login)
         let email_ok = await uzytkownik_dao.findByEmail(uzytkownik.email)
         if (login_ok != null && login_ok.id !== uzytkownik.id){

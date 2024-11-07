@@ -40,6 +40,54 @@ class HistoriaDao {
         });
     }
 
+    static async findByIdWaluty(id) {
+        return new Promise((resolve, reject) => {
+            db.get(`SELECT * FROM Historia WHERE id_waluty = ?`, [id], (err, row) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(row);
+            });
+        });
+    }
+
+    static async findByData(id) {
+        return new Promise((resolve, reject) => {
+            db.get(`SELECT * FROM Historia WHERE data = ?`, [data], (err, row) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(row);
+            });
+        });
+    }
+
+    static async findByDataRange(id, start, stop) {
+        return new Promise((resolve, reject) => {
+            db.get(`SELECT * FROM Historia WHERE id_waluty = ? and data between ? and ?`, [id, start, stop], (err, row) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(row);
+            });
+        });
+    }
+
+    static async update(historia){
+        const {id, symbol_unicode, nazwa, kraj} = historia;
+        return new Promise((resolve, reject) => {
+            db.run(
+                `UPDATE Historia SET symbol_unicode = ?, nazwa = ?, kraj = ? WHERE id = ?`,
+                [symbol_unicode, nazwa, kraj, id],
+                function (err) {
+                    if(err){
+                        return reject(err);
+                    }
+                    resolve(this.changes);
+                });
+        });
+    }
+
     static async delete(id) {
         return new Promise((resolve, reject) => {
             db.run(`DELETE FROM Historia WHERE id = ?`, [id], function (err) {
