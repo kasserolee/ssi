@@ -45,6 +45,11 @@ class UzytkownikController {
         await uzytkownik_dao.update(uzytkownik)
         return "ok"
     }
+
+    async na_serio_delete_uzytkownik(id){
+        await uzytkownik_dao.delete(id)
+        return "ok"
+    }
 }
 
 module.exports = UzytkownikController;

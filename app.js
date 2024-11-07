@@ -3,6 +3,7 @@ const path = require('path');
 const logger = require('morgan');
 const db = require('./config/database');
 const uzytkownik_controller = require('./controllers/UzytkownikController').prototype
+const waluta_controller = require('./controllers/WalutaController').prototype
 
 const app = express();
 
@@ -18,14 +19,13 @@ app.get('/', (req, res) => {
 });
 
 app.get("/test", (req, res) => {
-    let uzytkownik = {id: 3, login: "abcdef", haslo: "123", stan_konta: "użytkownik", imie: "abc", nazwisko: "c", email: "aabb.pl"}
-    uzytkownik_controller.update_uzytkownik(uzytkownik).then((value) => {
+    waluta_controller.save_waluta({symbol_unicode: "123", nazwa: "abc", kraj: "aaa"}).then((value) => {
         res.send(value)
     })
 })
 
-app.get("/uzytkownicy", (req, res) => {
-    uzytkownik_controller.all().then((value) => {
+app.get("/waluty", (req, res) => {
+    waluta_controller.all().then((value) => {
         res.send(value)
     })
 })

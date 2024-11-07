@@ -3,11 +3,11 @@ const db = new sqlite3.Database('./my_database.db');
 
 class WalutaDao {
     static async create(waluta) {
-        const { id, symbol_unicode, nazwa, kraj } = waluta;
+        const {symbol_unicode, nazwa, kraj } = waluta;
         return new Promise((resolve, reject) => {
             db.run(
-                `INSERT INTO Waluta (id, symbol_unicode, nazwa, kraj) VALUES (?, ?, ?, ?)`,
-                [id, symbol_unicode, nazwa, kraj],
+                `INSERT INTO Waluta (symbol_unicode, nazwa, kraj) VALUES (?, ?, ?)`,
+                [symbol_unicode, nazwa, kraj],
                 function (err) {
                     if (err) {
                         return reject(err);
@@ -32,6 +32,17 @@ class WalutaDao {
     static async findById(id) {
         return new Promise((resolve, reject) => {
             db.get(`SELECT * FROM Waluta WHERE id = ?`, [id], (err, row) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(row);
+            });
+        });
+    }
+
+    static async findByNazwa(nazwa) {
+        return new Promise((resolve, reject) => {
+            db.get(`SELECT id FROM Waluta WHERE nazwa = ?`, [nazwa], (err, row) => {
                 if (err) {
                     return reject(err);
                 }
