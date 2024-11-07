@@ -11,3 +11,5 @@ class Waluty_dto{
         this.kraj = dane.kraj;
     }
 }
+
+module.exports = Waluty_dto;

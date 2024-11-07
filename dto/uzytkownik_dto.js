@@ -13,3 +13,5 @@ class Uzytkownik_dto{
         this.email = dane.email;
     }
 }
+
+module.exports = Uzytkownik_dto;

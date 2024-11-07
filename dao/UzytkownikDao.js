@@ -44,6 +44,21 @@ class UzytkownikDao {
         });
     }
 
+    static async findByLogin(uzytkownik){
+        const login = uzytkownik.login;
+        return new Promise((resolve, reject) => {
+            db.get(
+                `SELECT id from Uzytkownik where login = ?`,
+                [login],
+                    (err, row) => {
+                    if(err){
+                        return reject(err);
+                    }
+                    resolve(row);
+                });
+        });
+    }
+
 
     static async update(uzytkownik){
         const {id, login, haslo, stan_konta, imie, nazwisko, email} = uzytkownik;

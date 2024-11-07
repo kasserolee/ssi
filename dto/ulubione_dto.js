@@ -10,3 +10,5 @@ class Ulubione_dto{
     }
 
 }
+
+module.exports = Ulubione_dto;

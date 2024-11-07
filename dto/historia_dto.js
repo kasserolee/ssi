@@ -11,3 +11,5 @@ class Historia_dto{
         this.kurs = dane.kurs;
     }
 }
+
+module.exports = Historia_dto;
