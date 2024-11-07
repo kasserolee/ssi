@@ -46,7 +46,7 @@ class UzytkownikDao {
 
     static async findByEmail(email) {
         return new Promise((resolve, reject) => {
-            db.get(`SELECT *
+            db.get(`SELECT id
                     FROM Uzytkownik
                     WHERE email = ?`, [email], (err, row) => {
                 if (err) {
