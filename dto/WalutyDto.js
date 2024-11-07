@@ -1,4 +1,4 @@
-class Waluty_dto{
+class WalutyDto {
     id;
     symbol;
     nazwa;
@@ -12,4 +12,4 @@ class Waluty_dto{
     }
 }
 
-module.exports = Waluty_dto;
+module.exports = WalutyDto;

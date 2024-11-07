@@ -1,4 +1,4 @@
-class Historia_dto{
+class HistoriaDto {
     id;
     id_waluty;
     data;
@@ -12,4 +12,4 @@ class Historia_dto{
     }
 }
 
-module.exports = Historia_dto;
+module.exports = HistoriaDto;

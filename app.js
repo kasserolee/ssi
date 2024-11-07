@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const db = require('./config/database');
-const uzytkownik_controller = require('./controllers/uzytkownik_controller').prototype
+const uzytkownik_controller = require('./controllers/UzytkownikController').prototype
 
 const app = express();
 

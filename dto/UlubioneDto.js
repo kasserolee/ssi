@@ -1,4 +1,4 @@
-class Ulubione_dto{
+class UlubioneDto {
     id;
     id_uzytkownika;
     id_waluty;
@@ -11,4 +11,4 @@ class Ulubione_dto{
 
 }
 
-module.exports = Ulubione_dto;
+module.exports = UlubioneDto;

@@ -1,6 +1,6 @@
 const uzytkownik_dao = require("../dao/UzytkownikDao")
 
-class Uzytkownik_controller{
+class UzytkownikController {
     async save_uzytkownik(uzytkownik){
         let login_ok = await uzytkownik_dao.findByLogin(uzytkownik.login)
         let email_ok = await uzytkownik_dao.findByEmail(uzytkownik.email)
@@ -47,4 +47,4 @@ class Uzytkownik_controller{
     }
 }
 
-module.exports = Uzytkownik_controller;
+module.exports = UzytkownikController;

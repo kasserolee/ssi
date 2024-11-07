@@ -1,4 +1,4 @@
-class Uzytkownik_dto{
+class UzytkownikDto {
     id;
     login;
     imie;
@@ -14,4 +14,4 @@ class Uzytkownik_dto{
     }
 }
 
-module.exports = Uzytkownik_dto;
+module.exports = UzytkownikDto;
