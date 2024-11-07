@@ -44,8 +44,20 @@ class UzytkownikDao {
         });
     }
 
-    static async findByLogin(uzytkownik){
-        const login = uzytkownik.login;
+    static async findByEmail(email) {
+        return new Promise((resolve, reject) => {
+            db.get(`SELECT *
+                    FROM Uzytkownik
+                    WHERE email = ?`, [email], (err, row) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(row);
+            });
+        });
+    }
+
+    static async findByLogin(login){
         return new Promise((resolve, reject) => {
             db.get(
                 `SELECT id from Uzytkownik where login = ?`,

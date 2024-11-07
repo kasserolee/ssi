@@ -2,15 +2,11 @@ const uzytkownik_dao = require("../dao/UzytkownikDao")
 
 class Uzytkownik_controller{
     async save_uzytkownik(uzytkownik){
-        return (uzytkownik_dao.findByLogin(uzytkownik).then((value) => {
-            if (value == null) {
-                uzytkownik.stan_konta = "użytkownik";
-                uzytkownik_dao.create(uzytkownik);
-                return true;
-            } else {
-                return false;
-            }
-        }))
+        let login_ok = await uzytkownik_dao.findByLogin(uzytkownik.login)
+        let email_ok = await uzytkownik_dao.findByEmail(uzytkownik.email)
+        if (login_ok != null) return "login";
+        if (email_ok != null) return "email";
+        else return "ok";
     }
 
     async all() {
@@ -19,6 +15,13 @@ class Uzytkownik_controller{
 
     async update_uzytkownik(uzytkownik){
         await uzytkownik_dao.update(uzytkownik);
+    }
+
+    async block_uzytkownik(uzytkownik){
+        uzytkownik.stan_konta = "zablokowany"
+        uzytkownik.imie = "zablokowany"
+        uzytkownik.nazwisko = "zablokowany"
+        await uzytkownik_dao.update(uzytkownik)
     }
 
     async delete_uzytkownik(uzytkownik){
