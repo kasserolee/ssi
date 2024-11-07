@@ -18,15 +18,17 @@ app.get('/', (req, res) => {
   res.send('Aplikacja + baza danych');
 });
 
-app.get("/test", async (req, res) => {
+app.get("/test", (req, res) => {
     let uzytkownik = {login: "abcde", haslo: "123", imie: "aaa", nazwisko: "bbb", email: "123@321.pl"}
-    let ok = await uzytkownik_controller.save_uzytkownik(uzytkownik)
-    res.send(ok)
+    uzytkownik_controller.save_uzytkownik(uzytkownik).then((value) => {
+        res.send(value)
+    })
 })
 
-app.get("/uzytkownicy", async (req, res) => {
-    let a = await uzytkownik_controller.all()
-    res.send(a)
+app.get("/uzytkownicy", (req, res) => {
+    uzytkownik_controller.all().then((value) => {
+        res.send(value)
+    })
 })
 
 
