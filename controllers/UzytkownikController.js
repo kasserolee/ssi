@@ -56,6 +56,17 @@ class UzytkownikController {
         await uzytkownik_dao.delete(id)
         return "ok"
     }
+
+
+    async authenticate(login, haslo){
+        const user = await uzytkownik_dao.findByLogin(login);
+
+        if(user && user.haslo === haslo){
+            return user;
+        }
+
+        return null;
+    }
 }
 
 module.exports = UzytkownikController;

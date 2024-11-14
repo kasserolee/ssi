@@ -60,7 +60,7 @@ class UzytkownikDao {
     static async findByLogin(login){
         return new Promise((resolve, reject) => {
             db.get(
-                `SELECT id from Uzytkownik where login = ?`,
+                `SELECT id, login, haslo, stan_konta, imie, nazwisko, email from Uzytkownik where login = ?`,
                 [login],
                     (err, row) => {
                     if(err){
