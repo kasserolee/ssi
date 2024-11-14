@@ -20,6 +20,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
+const not_logged_in = ["/rejestracja", "/login"];
 const logged_in = ["/a"];
 const admin = ["/b"];
 
@@ -28,8 +29,9 @@ app.use((req, res, next) => {
   let role = "niezalogowany";
   if (cookie !== undefined) role = cookie.role;
   let clearance = 0;
-  let sec = 0;
-  if (logged_in.includes(req.path)) sec = 1;
+  let sec = 2;
+  if (not_logged_in.includes(req.path)) sec = 0;
+  else if (logged_in.includes(req.path)) sec = 1;
   else if (admin.includes(req.path)) sec = 2;
 
   if (role === "użytkownik") clearance = 1;
