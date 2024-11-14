@@ -28,6 +28,8 @@ router.post('/', async (req, res) => {
 
         res.cookie('session_token', sessionId, {httpOnly: true});
 
+        res.cookie("uzytkownik", sessionData);
+
         res.send({status: "success"});
 
         console.log(sessions);
