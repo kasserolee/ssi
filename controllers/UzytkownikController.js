@@ -6,7 +6,11 @@ class UzytkownikController {
         let email_ok = await uzytkownik_dao.findByEmail(uzytkownik.email)
         if (login_ok != null) return "login";
         if (email_ok != null) return "email";
-        else return "ok";
+        else {
+            uzytkownik.stan_konta = "użytkownik";
+            await uzytkownik_dao.create(uzytkownik);
+            return "ok";
+        }
     }
 
     async all() {

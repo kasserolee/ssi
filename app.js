@@ -3,13 +3,13 @@ const path = require('path');
 const logger = require('morgan');
 const cors = require("cors");
 const db = require('./config/database');
-const uzytkownik_controller = require('./controllers/UzytkownikController').prototype
-const waluta_controller = require('./controllers/WalutaController').prototype
+const rejestracja = require("./routes/rejestracja");
 
 const app = express();
 
 
 app.use(logger('dev'));
+app.set('view engine', 'pug')
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
@@ -20,16 +20,12 @@ app.get('/', (req, res) => {
 });
 
 app.get("/test", (req, res) => {
-    waluta_controller.save_waluta({symbol_unicode: "123", nazwa: "abc", kraj: "aaa"}).then((value) => {
-        res.send(value)
-    })
 })
 
 app.get("/waluty", (req, res) => {
-    waluta_controller.all().then((value) => {
-        res.send(value)
-    })
 })
+
+app.use("/rejestracja", rejestracja);
 
 
 app.use((req, res, next) => {
