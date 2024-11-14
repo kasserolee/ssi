@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../ssi.iml" filepath="$PROJECT_DIR$/../ssi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ssi_react/ssi_react.iml" filepath="$PROJECT_DIR$/../ssi_react/ssi_react.iml" />
     </modules>
   </component>
 </project>
