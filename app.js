@@ -8,6 +8,7 @@ const rejestracja = require("./routes/rejestracja");
 const login = require("./routes/login");
 const {log} = require("debug");
 const cookieParser = require("cookie-parser");
+const walutyRouter = require('./routes/waluty');
 
 const app = express();
 
@@ -20,7 +21,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
-const not_logged_in = ["/rejestracja", "/login"];
+const not_logged_in = ["/rejestracja", "/login", "/api/waluty"];
 const logged_in = ["/a"];
 const admin = ["/b"];
 
@@ -43,6 +44,7 @@ app.use((req, res, next) => {
 
 app.use("/rejestracja", rejestracja);
 app.use("/login", login);
+app.use("/api/waluty", walutyRouter);
 
 app.get('/', (req, res) => {
   res.send('Aplikacja + baza danych');

@@ -42,7 +42,7 @@ class WalutaDao {
 
     static async findByNazwa(nazwa) {
         return new Promise((resolve, reject) => {
-            db.get(`SELECT id FROM Waluta WHERE nazwa = ?`, [nazwa], (err, row) => {
+            db.get(`SELECT * FROM Waluta WHERE nazwa = ?`, [nazwa], (err, row) => {
                 if (err) {
                     return reject(err);
                 }
@@ -77,6 +77,31 @@ class WalutaDao {
             });
         });
     }
+
+
+    static async findBySymbol(symbol) {
+        return new Promise((resolve, reject) => {
+            db.get(`SELECT * FROM Waluta WHERE symbol_unicode = ?`, [symbol], (err, row) => {
+                if(err) {
+                    return reject(err);
+                }
+                resolve(row);
+            });
+        });
+    }
+
+
+    static async findByCountry(kraj) {
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT * FROM Waluta WHERE kraj = ?`, [kraj], (err, rows) => {
+                if(err) {
+                    return reject(err);
+                }
+                resolve(rows);
+            });
+        });
+    }
+
 }
 
 module.exports = WalutaDao;
