@@ -21,6 +21,10 @@ class UzytkownikController {
         return await uzytkownik_dao.findById(id)
     }
 
+    async get_uzytkownik_by_login(login){
+        return await uzytkownik_dao.findByLogin(login)
+    }
+
     async update_uzytkownik(uzytkownik){
         let login_ok = await uzytkownik_dao.findByLogin(uzytkownik.login)
         let email_ok = await uzytkownik_dao.findByEmail(uzytkownik.email)
@@ -61,7 +65,7 @@ class UzytkownikController {
     async authenticate(login, haslo){
         const user = await uzytkownik_dao.findByLogin(login);
 
-        if(user && user.haslo === haslo){
+        if(user && user.haslo === haslo && user.stan_konta !== "zablokowany" && user.stan_konta !== "usunięty"){
             return user;
         }
 

@@ -12,23 +12,23 @@ const walutyRouter = require('./routes/waluty');
 
 const app = express();
 
+app.use(cors({origin: "http://localhost:3000", credentials: true}));
 app.use(logger('dev'));
-app.use(cookieParser());
+app.use(cookieParser("SuperSecretParsing"));
 app.set('view engine', 'pug')
 app.use(express.json());
-app.use(cors());
 app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
 const not_logged_in = ["/rejestracja", "/login", "/api/waluty"];
-const logged_in = ["/a"];
-const admin = ["/b"];
+const logged_in = ["/login/wyloguj"];
+const admin = [];
 
 app.use((req, res, next) => {
-  let cookie = req.cookies.uzytkownik;
+  let cookies = req.signedCookies;
   let role = "niezalogowany";
-  if (cookie !== undefined) role = cookie.role;
+  if (cookies !== undefined) role = cookies["stan_konta"];
   let clearance = 0;
   let sec = 2;
   if (not_logged_in.includes(req.path)) sec = 0;
@@ -45,16 +45,6 @@ app.use((req, res, next) => {
 app.use("/rejestracja", rejestracja);
 app.use("/login", login);
 app.use("/api/waluty", walutyRouter);
-
-app.get('/', (req, res) => {
-  res.send('Aplikacja + baza danych');
-});
-
-app.get("/test", async (req, res) => {
-});
-
-app.get("/waluty", (req, res) => {
-})
 
 app.get("/403", (req, res, next) => {
   res.send("403 Forbidden");
