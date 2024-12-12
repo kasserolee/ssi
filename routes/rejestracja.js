@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
     let x = await uzytkownik_controller.save_uzytkownik(req.body);
     if (x === "ok") {
-        let user = uzytkownik_controller.get_uzytkownik();
+        let user = await uzytkownik_controller.get_uzytkownik_by_login(req.body.login);
         res.cookie("stan_konta", user.stan_konta, {signed: true})
         res.cookie("id", user.id, {signed: true});
     }

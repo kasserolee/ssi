@@ -25,6 +25,14 @@ router.get("/:id", async (req, res) => {
     let historia = await HistoriaController.get_historia_waluta(req.params.id);
     res.send({waluta, historia});
 })
+router.post("/search", async (req, res) => {
+    let waluty = await walutaController.waluta_search(req.body.query);
+    for (let i = 0; i < waluty.length; i++) {
+        let his = await HistoriaController.get_historia_waluta_last(waluty[i].id)
+        if (his !== undefined) waluty[i].kurs = his.kurs;
+    }
+    res.send(waluty);
+})
 router.post("/", walutaController.create);
 router.put("/:id", walutaController.update);
 router.delete("/:id", walutaController.delete);

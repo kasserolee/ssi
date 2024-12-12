@@ -28,6 +28,10 @@ class WalutaController{
         return "ok"
     }
 
+    async waluta_search(query){
+        return await waluta_dao.search(query);
+    }
+
 
     // API
     async getAll(req, res) {

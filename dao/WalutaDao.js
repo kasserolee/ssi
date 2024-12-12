@@ -29,6 +29,17 @@ class WalutaDao {
         });
     }
 
+    static async search(query) {
+        return new Promise((resolve, reject) => {
+            db.all(`SELECT * FROM Waluta where nazwa like ? or kraj like ? or symbol_unicode like ?`, ["%"+query+"%", "%"+query+"%", "%"+query+"%"], (err, rows) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(rows);
+            });
+        });
+    }
+
     static async findById(id) {
         return new Promise((resolve, reject) => {
             db.get(`SELECT * FROM Waluta WHERE id = ?`, [id], (err, row) => {

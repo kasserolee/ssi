@@ -10,6 +10,7 @@ const {log} = require("debug");
 const cookieParser = require("cookie-parser");
 const walutyRouter = require('./routes/waluty');
 const ulubioneRouter = require("./routes/ulubione");
+const uzytkownikRouter = require("./routes/uzytkownicy");
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use("/rejestracja", rejestracja);
 app.use("/login", login);
 app.use("/api/waluty", walutyRouter);
 app.use("/api/ulubione", ulubioneRouter);
+app.use("/api/uzytkownicy", uzytkownikRouter);
 
 app.get("/403", (req, res, next) => {
   res.send("403 Forbidden");
