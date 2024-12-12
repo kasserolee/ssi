@@ -22,6 +22,11 @@ class UlubioneController{
         return await ulubione_dao.findByIdWaluty(id);
     }
 
+    async uzytkownik_waluta_delete(id_waluty, id_uzytkownika){
+        let x = await ulubione_dao.findIdUzytkownikaIdWaluty(id_uzytkownika, id_waluty);
+        return await ulubione_dao.delete(x.id);
+    }
+
     async delete_ulubione(id){
         await ulubione_dao.delete(id);
         return "ok"

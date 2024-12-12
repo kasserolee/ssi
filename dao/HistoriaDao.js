@@ -42,11 +42,11 @@ class HistoriaDao {
 
     static async findByIdWaluty(id) {
         return new Promise((resolve, reject) => {
-            db.get(`SELECT * FROM Historia WHERE id_waluty = ?`, [id], (err, row) => {
+            db.all(`SELECT * FROM Historia WHERE id_waluty = ?`, [id], (err, rows) => {
                 if (err) {
                     return reject(err);
                 }
-                resolve(row);
+                resolve(rows);
             });
         });
     }

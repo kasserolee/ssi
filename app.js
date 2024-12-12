@@ -9,6 +9,7 @@ const login = require("./routes/login");
 const {log} = require("debug");
 const cookieParser = require("cookie-parser");
 const walutyRouter = require('./routes/waluty');
+const ulubioneRouter = require("./routes/ulubione");
 
 const app = express();
 
@@ -25,7 +26,7 @@ const not_logged_in = ["/rejestracja", "/login", "/api/waluty"];
 const logged_in = ["/login/wyloguj"];
 const admin = [];
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   let cookies = req.signedCookies;
   let role = "niezalogowany";
   if (cookies !== undefined) role = cookies["stan_konta"];
@@ -40,11 +41,12 @@ app.use((req, res, next) => {
 
   if (clearance >= sec) next();
   else res.redirect("/403");
-})
+})*/
 
 app.use("/rejestracja", rejestracja);
 app.use("/login", login);
 app.use("/api/waluty", walutyRouter);
+app.use("/api/ulubione", ulubioneRouter);
 
 app.get("/403", (req, res, next) => {
   res.send("403 Forbidden");

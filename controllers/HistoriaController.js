@@ -18,6 +18,11 @@ class HistoriaController{
         return await historia_dao.findByIdWaluty(id);
     }
 
+    async get_historia_waluta_last(id){
+        let waluta = await historia_dao.findByIdWaluty(id);
+        return waluta[waluta.length-1];
+    }
+
     async get_historia_data(data){ //TODO formatowanie dat
         return await historia_dao.findByData(data);
     }
