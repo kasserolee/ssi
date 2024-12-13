@@ -27,4 +27,13 @@ router.post("/wyloguj", (req, res) => {
     res.send("ok");
 })
 
+router.post("/autoryzuj", (req, res) => {
+    let cookies = req.signedCookies;
+    if (cookies["stan_konta"] === undefined || cookies["stan_konta"] === false || cookies["stan_konta"] !== "administrator"){
+        res.status(403).send();
+        return 0;
+    }
+    res.send("ok");
+})
+
 module.exports = router;

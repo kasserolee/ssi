@@ -42,11 +42,11 @@ class UlubioneDao {
 
     static async findByIdUzytkownika(id) {
         return new Promise((resolve, reject) => {
-            db.get(`SELECT * FROM Ulubione WHERE id_uzytkownika = ?`, [id], (err, row) => {
+            db.all(`SELECT * FROM Ulubione WHERE id_uzytkownika = ?`, [id], (err, rows) => {
                 if (err) {
                     return reject(err);
                 }
-                resolve(row);
+                resolve(rows);
             });
         });
     }

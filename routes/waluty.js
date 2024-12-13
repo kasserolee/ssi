@@ -32,7 +32,17 @@ router.post("/search", async (req, res) => {
         if (his !== undefined) waluty[i].kurs = his.kurs;
     }
     res.send(waluty);
+});
+
+router.use((req, res, next) => {
+    let cookies = req.signedCookies;
+    if (cookies["stan_konta"] === undefined || cookies["stan_konta"] === false || cookies["stan_konta"] !== "administrator"){
+        res.status(403).send();
+        return 0;
+    }
+    next();
 })
+
 router.post("/", walutaController.create);
 router.put("/:id", walutaController.update);
 router.delete("/:id", walutaController.delete);
